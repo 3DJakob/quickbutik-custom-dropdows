@@ -1,3 +1,151 @@
+<div id="searchFilters" class="row collection-header">
+</div>
+
+<div id="newSearchFilters">
+</div>
+
+
+<!--Filters-->
+
+<style>
+    .productfilter, .productsort {
+        display: none;
+    }
+
+    .card {
+        background-color: white;
+        box-shadow: 0px 0px 29px 0px rgba(0,0,0,0.2);
+        border-radius: 10px;
+        margin: 0 8px;
+    }
+
+    #newSearchFilters {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #newSearchFilters .crossTagsContainer {
+        display: flex;
+    }
+
+    #newSearchFilters .crossTagsContainer>div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        margin-right: 6px;
+        margin-bottom: 20px;
+        /*border: 1px solid #999;*/
+        padding: 4px 10px;
+        border-radius: 40px;
+        color: #666;
+    }
+
+    /*Cross*/
+    #newSearchFilters .crossTagsContainer>div>i {
+        display: flex;
+        align-items: center;
+        margin: 0 6px;
+    }
+
+    #newSearchFilters .titles {
+        display: flex;
+        overflow: hidden;
+    }
+
+    #newSearchFilters .titles {
+        display: flex;
+    }
+
+    #newSearchFilters .titles div {
+        padding: 14px;
+        border-right: 1px solid #eee;
+        width: 140px;
+        text-align: center;
+        transition: 200ms;
+        cursor: pointer;
+    }
+
+    @media (hover: hover) {
+        #newSearchFilters .titles div:hover {
+            background-color: #efefef;
+        }
+    }
+
+    #newSearchFilters .animationContainer {
+        margin-top: 20px;
+    }
+
+    #newSearchFilters .animationContainer .categoryDropdown {
+        height: 0px;
+        transition: 200ms;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    #newSearchFilters .animationContainer .categoryDropdown .animationWrapper {
+        padding: 20px 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        box-shadow: none;
+    }
+
+    #newSearchFilters .animationContainer .animationWrapper>div {
+        color: #666;
+        transition: 200ms;
+        cursor: pointer;
+        padding: 6px 20px;
+        border-radius: 50px;
+        margin: 8px;
+    }
+
+    #newSearchFilters .animationContainer .categoryDropdown .animationWrapper>p {
+        width: 100%;
+        color: #999;
+        margin: 0;
+        margin-top: 8px;
+        margin-left: 22px;
+    }
+
+    #newSearchFilters .animationContainer .animationWrapper>div.selected {
+        background-color: #666;
+        color: #fff;
+    }
+
+    @media (hover: hover) {
+        #newSearchFilters .animationContainer .animationWrapper>div:hover {
+            background-color: #666;
+            color: #fff;
+        }
+    }
+
+
+    @media screen and (max-width: 600px) {
+      #newSearchFilters {
+        align-items: stretch;
+      }
+      #newSearchFilters .titles>div {
+        flex: 1;
+        max-width: none;
+      }
+       #newSearchFilters .animationContainer .categoryDropdown .animationWrapper {
+        justify-content: flex-start;
+      }
+      #newSearchFilters .animationContainer .animationWrapper>div {
+          margin: 0px;
+      }
+      #newSearchFilters .animationContainer .categoryDropdown .animationWrapper>p {
+        margin-left: 18px;
+      }
+    }
+
+
+</style>
+
+<script>
+
 const getFilters = () => {
     setTimeout(function(){
         const filters = document.querySelectorAll('.productfilter')
@@ -188,3 +336,4 @@ const initiateFilters = (filterElements) => {
     target.appendChild(headerContainer)
     target.appendChild(animationContainer)
 }
+</script>
