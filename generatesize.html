@@ -1,0 +1,78 @@
+<style>
+    .newSize {
+        margin-left: 6px;
+        transition: 200ms;
+    }
+
+    .newSize:hover {
+        color: #000 !important;
+    }
+</style>
+
+<script>
+    // generateSizeDropdowns
+    const getCurrentCat = () => {
+        const breadcrumb = document.querySelector('.breadcrumb')
+        const dropdownCat = breadcrumb.children.item(1).title
+        const size = breadcrumb.children.length > 2 ? breadcrumb.children.item(2).title : null
+        return [dropdownCat, size]
+    }
+
+    const getSizesFromCat = (cat) => {
+        const allDropDowns = document.querySelectorAll('.has-dropdown')
+
+        let target = Array.from(allDropDowns).filter(dropDown => dropDown.children.item(0).textContent.includes(cat[0]))[0].querySelectorAll('.subnav ul li')
+        let sizes = Array.from(target).map(node => {
+            return {
+                title: node.textContent.replace('-', '').trim(),
+                subCategory: node.textContent.includes('-'),
+                selected: node.classList.contains('active'),
+                href: node.querySelector('a').href
+            }
+        })
+        if (cat[1]) {
+            const catIndex = sizes.reduce(function(filtered, size, i) {
+                if (size.title === cat[1]) { filtered.push(i); }
+                return filtered;
+            }, [])[0]
+            let allFound = false
+            sizes = sizes.filter((size, i) => {
+                if (allFound) { return false }
+                if (i > catIndex) {
+                    if (size.subCategory) {
+                        return true
+                    } else {
+                        allFound = true
+                        return false
+                    }
+                } else {
+                    return false
+                }
+            })
+        }
+        return sizes
+    }
+
+    const generateDropDownElements = (sizes) => {
+        const child = document.querySelector('.breadcrumb')
+        const parent = child.parentNode
+
+        sizes.map(size => {
+            const element = document.createElement('a')
+            element.textContent = size.title
+            element.href = size.href
+            element.style.color = size.selected ? '#000' : '#666'
+            element.className = 'newSize'
+            parent.appendChild(element)
+        })
+    }
+
+    const generateSizeDropdowns = () => {
+        const cat = getCurrentCat()
+        const sizes = getSizesFromCat(cat)
+        generateDropDownElements(sizes)
+    }
+
+    generateSizeDropdowns()
+
+</script>
